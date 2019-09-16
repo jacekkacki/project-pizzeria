@@ -96,17 +96,17 @@
         console.log('thisProduct.element ',thisProduct.element);
         
         /* find all active products */
-        const activeProducts = thisProduct.element.querySelectorAll(classNames.menuProduct.wrapperActive);
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
         console.log('activeProduct ', activeProducts);
 
         /* START LOOP: for each active product */
-        for (let active in activeProducts) {
+        for (let active of activeProducts) {
           console.log('active ', active);
+
           /* START: if the active product isn't the element of thisProduct */
           if (active != thisProduct.element){
             /* remove class active for the active product */
-            console.log('Warunek spełniony !!! active != thisProduct.element');
-  //          thisProduct.element.classList.remove(classNames.menuProduct.wrapperActive);
+            active.classList.remove(classNames.menuProduct.wrapperActive);
             /* END: if the active product isn't the element of thisProduct */
           }
         /* END LOOP: for each active product */
