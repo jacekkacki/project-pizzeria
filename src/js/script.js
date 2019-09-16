@@ -64,6 +64,7 @@
 
       console.log('new Product:', thisProduct);
     }
+
     renderInMenu(){
       const thisProduct = this;
       /*generate HTML based on template */
@@ -75,8 +76,10 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+    
     initAccordion(){
       const thisProduct = this;
+      console.log('thisProduct ', thisProduct);
   
       /* find the clickable trigger (the element that should react to clicking) */
       thisProduct.element.addEventListener('click', clicableTrigger);
@@ -89,22 +92,27 @@
         event.preventDefault();
       
         /* toggle active class on element of thisProduct */
-        thisProduct.element.classList.add('active');
-      }
-      
-      /* find all active products */
-  
-      /* START LOOP: for each active product */
-  
-      /* START: if the active product isn't the element of thisProduct */
-  
-      /* remove class active for the active product */
-  
-      /* END: if the active product isn't the element of thisProduct */
-  
-      /* END LOOP: for each active product */
-  
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        console.log('thisProduct.element ',thisProduct.element);
+        
+        /* find all active products */
+        const activeProducts = thisProduct.element.querySelectorAll(classNames.menuProduct.wrapperActive);
+        console.log('activeProduct ', activeProducts);
+
+        /* START LOOP: for each active product */
+        for (let active in activeProducts) {
+          console.log('active ', active);
+          /* START: if the active product isn't the element of thisProduct */
+          if (active != thisProduct.element){
+            /* remove class active for the active product */
+            console.log('Warunek spełniony !!! active != thisProduct.element');
+  //          thisProduct.element.classList.remove(classNames.menuProduct.wrapperActive);
+            /* END: if the active product isn't the element of thisProduct */
+          }
+        /* END LOOP: for each active product */
+        }
       /* END: click event listener to trigger */
+      }
     }
   }
 
