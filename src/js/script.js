@@ -163,20 +163,26 @@
       /* Create const 'price' with default prices */
       let price = thisProduct.data.price;
       console.log('price: ',price);
+
       /* START LOOP: for each params */
       for(let paramId in thisProduct.data.params) {
         const param = thisProduct.data.params[paramId];
+
         /* START LOOP: for each options of param */
         for (let optionId in param.options){
           console.log('optionId, optionId');
+
           const option = param.options[optionId];
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+
           /* if check options isn't default, product price increase */
           /* if this option, which is the default, is not checked, product price decrease */
           if (!option.default && optionSelected){
+            /* price increase */
             price = price + option.price;
             console.log('price', price);
           } else if (option.default && !optionSelected){
+            /* price decrease */
             price = price - option.price;
             console.log('price', price);
           }
