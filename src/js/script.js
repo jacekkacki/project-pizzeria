@@ -60,7 +60,10 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       console.log('new Product:', thisProduct);
     }
@@ -76,13 +79,23 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+
+    getElements(){
+      const thisProduct = this;
+    
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
     
     initAccordion(){
       const thisProduct = this;
       console.log('thisProduct ', thisProduct);
   
       /* find the clickable trigger (the element that should react to clicking) */
-      thisProduct.element.addEventListener('click', clicableTrigger);
+      thisProduct.accordionTrigger.addEventListener('click', clicableTrigger);
       console.log('clicableTrigger', clicableTrigger);
   
       /* START: click event listener to trigger */
@@ -102,7 +115,12 @@
         /* START LOOP: for each active product */
         for (let active of activeProducts) {
           console.log('active ', active);
-
+          /*
+          console.log('thisProduct.form ',thisProduct.form);
+          console.log('thisProduct.formInputs ',thisProduct.formInputs);
+          console.log('thisProduct.cartButton ',thisProduct.cartButton);
+          console.log('thisProduct.priceElem ',thisProduct.priceElem);
+          */
           /* START: if the active product isn't the element of thisProduct */
           if (active != thisProduct.element){
             /* remove class active for the active product */
@@ -114,6 +132,54 @@
       /* END: click event listener to trigger */
       }
     }
+
+    initOrderForm(){
+      const thisProduct = this;
+      console.log('initOrderForm');
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+      
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+      
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    processOrder(){
+      const thisProduct = this;
+      console.log('processOrder');
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData', formData);
+      console.log('thisProduct.formInputs ',thisProduct.formInputs);
+      console.log('thisProduct.priceElem ',thisProduct.priceElem);
+      /* Create const 'price' with default prices */
+      const price = thisProduct.data.price;
+      console.log('price: ',price);
+      /* START LOOP: for each params */
+
+        /* START LOOP: for each options of param */
+          
+          /* if check options isn't default, product price increase */
+
+          /* if this option, which is the default, is not checked, product price decrease */
+
+        /* END LOOP: for each options of param */
+      
+      /* END LOOP: for each params */
+
+      /* update price thisProduct.priceElem */
+
+    }
+
   }
 
   const app = {
