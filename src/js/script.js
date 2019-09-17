@@ -88,6 +88,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     
     initAccordion(){
@@ -174,6 +175,8 @@
 
           const option = param.options[optionId];
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          const images = thisProduct.imageWrapper.querySelectorAll('.paramId-optionId');
+          console.log('images', images);
 
           /* if check options isn't default, product price increase */
           /* if this option, which is the default, is not checked, product price decrease */
