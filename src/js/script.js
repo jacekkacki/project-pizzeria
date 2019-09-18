@@ -116,12 +116,7 @@
         /* START LOOP: for each active product */
         for (let active of activeProducts) {
           console.log('active ', active);
-          /*
-          console.log('thisProduct.form ',thisProduct.form);
-          console.log('thisProduct.formInputs ',thisProduct.formInputs);
-          console.log('thisProduct.cartButton ',thisProduct.cartButton);
-          console.log('thisProduct.priceElem ',thisProduct.priceElem);
-          */
+
           /* START: if the active product isn't the element of thisProduct */
           if (active != thisProduct.element){
             /* remove class active for the active product */
@@ -175,25 +170,38 @@
 
           const option = param.options[optionId];
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-          const images = thisProduct.imageWrapper.querySelectorAll('.paramId-optionId');
-          console.log('images', images);
+
+          /* create const images with all image */
+          const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
           /* if check options isn't default, product price increase */
-          /* if this option, which is the default, is not checked, product price decrease */
           if (!option.default && optionSelected){
             /* price increase */
             price = price + option.price;
             console.log('price', price);
+          /* if this option, which is the default, is not checked, product price decrease */
           } else if (option.default && !optionSelected){
             /* price decrease */
             price = price - option.price;
             console.log('price', price);
           }
-        }
 
-        /* END LOOP: for each options of param */
+          /* Visible images */
+          if (optionSelected){
+            for ( let image of images){
+              /* add selected options of params at the order Product */
+              image.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else {
+            for ( let image of images){
+              /* remove unselected options of params at the order Product */
+              image.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
+          /* END LOOP: for each options of param */
+        }
+        /* END LOOP: for each params */
       }
-      /* END LOOP: for each params */
       /* update price thisProduct.priceElem */
       thisProduct.priceElem.innerHTML = price;
       console.log('thisProduct.priceElem', thisProduct.priceElem);
