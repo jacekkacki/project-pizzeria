@@ -63,6 +63,7 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
 
       console.log('new Product:', thisProduct);
@@ -89,15 +90,16 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     
     initAccordion(){
       const thisProduct = this;
-      console.log('thisProduct ', thisProduct);
+      //  console.log('thisProduct ', thisProduct);
   
       /* find the clickable trigger (the element that should react to clicking) */
       thisProduct.accordionTrigger.addEventListener('click', clicableTrigger);
-      console.log('clicableTrigger', clicableTrigger);
+      //  console.log('clicableTrigger', clicableTrigger);
   
       /* START: click event listener to trigger */
       function clicableTrigger(event){
@@ -107,15 +109,15 @@
       
         /* toggle active class on element of thisProduct */
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
-        console.log('thisProduct.element ',thisProduct.element);
+        //   console.log('thisProduct.element ',thisProduct.element);
         
         /* find all active products */
         const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
-        console.log('activeProduct ', activeProducts);
+        //  console.log('activeProduct ', activeProducts);
 
         /* START LOOP: for each active product */
         for (let active of activeProducts) {
-          console.log('active ', active);
+          //   console.log('active ', active);
 
           /* START: if the active product isn't the element of thisProduct */
           if (active != thisProduct.element){
@@ -131,7 +133,7 @@
 
     initOrderForm(){
       const thisProduct = this;
-      console.log('initOrderForm');
+      //  console.log('initOrderForm');
 
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -150,15 +152,21 @@
       });
     }
 
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
     processOrder(){
       const thisProduct = this;
-      console.log('processOrder');
+      //   console.log('processOrder');
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      //   console.log('formData', formData);
 
       /* Create const 'price' with default prices */
       let price = thisProduct.data.price;
-      console.log('price: ',price);
+      //   console.log('price: ',price);
 
       /* START LOOP: for each params */
       for(let paramId in thisProduct.data.params) {
@@ -166,7 +174,7 @@
 
         /* START LOOP: for each options of param */
         for (let optionId in param.options){
-          console.log('optionId, optionId');
+          //    console.log('optionId, optionId');
 
           const option = param.options[optionId];
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
@@ -178,12 +186,12 @@
           if (!option.default && optionSelected){
             /* price increase */
             price = price + option.price;
-            console.log('price', price);
+            //    console.log('price', price);
           /* if this option, which is the default, is not checked, product price decrease */
           } else if (option.default && !optionSelected){
             /* price decrease */
             price = price - option.price;
-            console.log('price', price);
+            //    console.log('price', price);
           }
 
           /* Visible images */
@@ -204,12 +212,39 @@
       }
       /* update price thisProduct.priceElem */
       thisProduct.priceElem.innerHTML = price;
-      console.log('thisProduct.priceElem', thisProduct.priceElem);
+      //    console.log('thisProduct.priceElem', thisProduct.priceElem);
     }
 
   }
 
-  
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
+      thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+    }
+
+    getElements(element){
+      const thisWidget = this;
+    
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+    setValue(value){
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /* TODO: Add validation */
+
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+    }
+  }  
 
   const app = {
     initData: function(){
