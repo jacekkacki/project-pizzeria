@@ -10,6 +10,7 @@
         "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
         "init:gitignore:custom": "echo \"dist\" >> .gitignore",
         "test": "npm-run-all test:*",
+        "_test:html": "globstar nu-html-checker dist/*.html",
         "test:js": "eslint src/js/",
         "test:scss": "stylelint src/sass/",
         "build": "npm-run-all build:* test",
@@ -29,7 +30,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "json-server": "^0.15.1"
+      "json-server": "^0.14.2"
     },
     "devDependencies": {
         "autoprefixer-cli": "^1.0.0",
