@@ -64,7 +64,6 @@ const app = {
     const thisApp = this;
 
     thisApp.booking = document.querySelector(select.containerOf.booking);
-    console.log('thisApp.booking',thisApp.booking);
 
     new Booking(thisApp.booking);
   },
