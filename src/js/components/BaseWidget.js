@@ -8,7 +8,6 @@ class BaseWidget{
 
     thisWidget.correctValue = initialValue;
 
-    // console.log('AmountWidget:', thisWidget);
   }
 
   get value(){
