@@ -44,7 +44,7 @@ class DatePicker extends BaseWidget{
 
   parseValue(value){
 
-    return parseInt(value);
+    return value;
   }
 
   isValid(){
