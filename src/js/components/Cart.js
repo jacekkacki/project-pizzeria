@@ -128,7 +128,7 @@ class Cart{
 
     for(let product of thisCart.products){
       payload.products.push(product.getData());
-      console.log('payload.products', payload.products);
+      //console.log('payload.products', payload.products);
     }
 
     const options = {
