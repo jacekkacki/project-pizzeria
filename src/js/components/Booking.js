@@ -91,7 +91,6 @@ class Booking{
         }
       }
     }
-    console.log(thisBooking.booked);
     thisBooking.updateDOM();
   }
 
@@ -104,16 +103,12 @@ class Booking{
 
     const startHour = utils.hourToNumber(hour);
     
-    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock +=0.5){
+    for(let hourBlock = startHour; hourBlock <= startHour + duration; hourBlock += 0.5){
 
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
       } else {
-        let findTable = thisBooking.booked[date][hourBlock].indexOf(table);
-        if(findTable == -1){
-          thisBooking.booked[date][hourBlock].push(table);
-        } 
-      
+        thisBooking.booked[date][hourBlock].push(table);
       }
     } 
   }
@@ -142,7 +137,7 @@ class Booking{
       }
 
       /* Selected free table */
-      let busyTable = table.querySelector('.booked .selected');
+      let busyTable = table.querySelector('.selected .booked');
 
       if(busyTable == null){
 
@@ -183,9 +178,9 @@ class Booking{
     const payload ={
       date: thisBooking.datePicker.correctValue,
       hour : thisBooking.hourPicker.correctValue,
+      duration : parseInt(hoursAmount),
       table : parseInt(thisBooking.idTab),
       repeat : false,
-      duration : parseInt(hoursAmount),
       ppl: parseInt(peopleAmount),
       starters: startersElem,
     };
@@ -212,8 +207,6 @@ class Booking{
         console.log('parsedResponse', parsedResponse);
       });
     
-    thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
-    thisBooking.updateDOM();
   }
   
 
@@ -236,9 +229,6 @@ class Booking{
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
 
-    thisBooking.dom.linkDecrease = thisBooking.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
-    thisBooking.dom.linkIncrease = thisBooking.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
-
   }
 
   initWidgets(){
@@ -252,18 +242,18 @@ class Booking{
 
     thisBooking.dom.datePicker.addEventListener('updated', function(event){
       event.preventDefault();
-      thisBooking.updateDOM();
+      thisBooking.getData();
     });
 
     thisBooking.dom.hourPicker.addEventListener('updated', function(event){
       event.preventDefault();
-      thisBooking.updateDOM();
+      thisBooking.getData();
     });
     
     thisBooking.dom.wrapper.addEventListener('submit', function(event){
       event.preventDefault();
       thisBooking.sendBooking();
-      //thisBooking.updateDOM();
+      thisBooking.getData();
     });
 
   }
