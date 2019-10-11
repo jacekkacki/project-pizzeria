@@ -91,6 +91,7 @@ class Booking{
         }
       }
     }
+    //console.log('thisBooking.booked', thisBooking.booked);
     thisBooking.updateDOM();
   }
 
@@ -103,13 +104,12 @@ class Booking{
 
     const startHour = utils.hourToNumber(hour);
     
-    for(let hourBlock = startHour; hourBlock <= startHour + duration; hourBlock += 0.5){
+    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
 
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
-      } else {
-        thisBooking.booked[date][hourBlock].push(table);
-      }
+      } 
+      thisBooking.booked[date][hourBlock].push(table);
     } 
   }
 
@@ -206,7 +206,7 @@ class Booking{
       }).then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
       });
-    
+    thisBooking.getData();
   }
   
 
@@ -253,7 +253,6 @@ class Booking{
     thisBooking.dom.wrapper.addEventListener('submit', function(event){
       event.preventDefault();
       thisBooking.sendBooking();
-      thisBooking.getData();
     });
 
   }
