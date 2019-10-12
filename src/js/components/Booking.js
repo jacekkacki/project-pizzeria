@@ -171,6 +171,8 @@ class Booking{
 
     const selectedStarters = thisBooking.dom.wrapper.querySelectorAll('.checkbox input');
 
+    const selectedTab = thisBooking.dom.wrapper.querySelector('.selected');
+
     const startersElem = [];
 
     const url = settings.db.url + '/' + settings.db.booking;
@@ -207,7 +209,11 @@ class Booking{
         console.log('parsedResponse', parsedResponse);
       }).then(function(){
         thisBooking.getData();
+      }).then(function(){
+        selectedTab.classList.remove(classNames.booking.tableSelected);
       });
+    
+
   }
   
 
