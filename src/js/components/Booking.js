@@ -205,8 +205,9 @@ class Booking{
         return response.json();
       }).then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
+      }).then(function(){
+        thisBooking.getData();
       });
-    thisBooking.getData();
   }
   
 
@@ -242,12 +243,12 @@ class Booking{
 
     thisBooking.dom.datePicker.addEventListener('updated', function(event){
       event.preventDefault();
-      thisBooking.getData();
+      thisBooking.updateDOM();
     });
 
     thisBooking.dom.hourPicker.addEventListener('updated', function(event){
       event.preventDefault();
-      thisBooking.getData();
+      thisBooking.updateDOM();
     });
     
     thisBooking.dom.wrapper.addEventListener('submit', function(event){
