@@ -1,0 +1,106 @@
+.main-page {
+  padding-top: 50px;
+
+  .card {
+    img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      left: 0px;
+      right: 0px;
+    }
+
+    p {
+      opacity: 0;
+    }
+  }
+
+  .card:hover {
+    h2 {
+      border-style: solid;
+      border-color: $color-main;
+      transition: $transition;
+    }
+
+    p {
+      color: $color-light;
+      opacity: 1;
+      transition: $transition;
+    }
+  }
+
+  .card-img-overlay a {
+    text-decoration: none;
+    border-style: none;
+  
+    &.active {
+      border-style: solid;
+      border-color: $color-main;
+    }
+  }
+}
+
+.opening-hour {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: $color-main;
+
+  a {
+    text-decoration: none;
+
+    &.active {
+      border-style: solid;
+      border-color: $color-light;
+    }
+  }
+}
+
+.service .card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.gallery {
+  .card {
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    i {
+      opacity: 0;
+    }
+  }
+
+  .card:hover {
+    img {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.7;
+      transition: $transition;
+      background-image: linear-gradient(90deg, $color-main 50%, transparent 50%);
+    }
+
+    i {
+      color: $color-light;
+      display: inline-block;
+      opacity: 1;
+      transition: $transition;
+      transform: scale(1.5);
+      
+      &:hover {
+        color: $color-main;
+        transform: scale(1.5);
+      }
+    }
+  }
+}
+
+footer a {
+  color: $color-main;
+}

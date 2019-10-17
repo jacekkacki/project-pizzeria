@@ -208,9 +208,9 @@ class Booking{
       }).then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
       }).then(function(){
-        thisBooking.getData();
-      }).then(function(){
         selectedTab.classList.remove(classNames.booking.tableSelected);
+      }).then(function(){
+        thisBooking.getData();
       });
     
 

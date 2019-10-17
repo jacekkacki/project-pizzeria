@@ -10,7 +10,10 @@ const app = {
 
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    console.log('thisApp.pages',thisApp.pages);
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.carousel = document.querySelector('.carousel');
+    console.log('thisApp.carousel',thisApp.carousel);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -21,6 +24,7 @@ const app = {
         pageMatchingHash = page.id;
         break;
       }
+
     }
 
     thisApp.activatePage(pageMatchingHash);

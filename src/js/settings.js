@@ -65,7 +65,7 @@ export const select = {
     tables: '.floor-plan .table',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.card a',
   },
 };
 
@@ -84,9 +84,11 @@ export const classNames = {
   },
   nav: {
     active: 'active',
+    border: 'border',
   },
   pages: {
     active: 'active',
+    border: 'border',
   },
 };
 
