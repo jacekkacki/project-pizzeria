@@ -36,7 +36,7 @@
     &.active {
       border-style: solid;
       border-color: $color-main;
-    }
+    } 
   }
 }
 
@@ -48,11 +48,6 @@
 
   a {
     text-decoration: none;
-
-    &.active {
-      border-style: solid;
-      border-color: $color-light;
-    }
   }
 }
 
