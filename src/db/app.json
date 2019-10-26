@@ -206,8 +206,8 @@
 "event": [
   {
     "id": 1,
-    "date": "2019-10-10",
-    "hour": "12:30",
+    "date": "2019-10-27",
+    "hour": "13:00",
     "table": 1,
     "repeat": false,
     "duration": 4,
@@ -220,7 +220,7 @@
     "hour": "16:00",
     "table": 3,
     "repeat": "daily",
-    "duration": 2,
+    "duration": 4,
     "ppl": 3,
     "starters": ["bread", "lemonWater"]
   },
@@ -249,6 +249,7 @@
     "date": "2019-10-10",
     "hour": "18:00",
     "table": 2,
+    "repeat": "daily",
     "duration": 2,
     "ppl": 3,
     "starters": ["lemonWater"]
@@ -257,9 +258,39 @@
 "booking": [
   {
     "id": 1,
-    "date": "2019-10-10",
+    "date": "2019-10-27",
     "hour": "17:00",
+    "duration": 1,
+    "table": 1,
+    "repeat": false,
+    "ppl": 3,
+    "starters": ["lemonWater"]
+  },
+  {
+    "id": 1,
+    "date": "2019-10-27",
+    "hour": "18:00",
     "duration": 4,
+    "table": 1,
+    "repeat": false,
+    "ppl": 3,
+    "starters": ["lemonWater"]
+  },
+  {
+    "id": 1,
+    "date": "2019-10-29",
+    "hour": "13:00",
+    "duration": 1,
+    "table": 1,
+    "repeat": false,
+    "ppl": 3,
+    "starters": ["lemonWater"]
+  },
+  {
+    "id": 1,
+    "date": "2019-10-29",
+    "hour": "16:00",
+    "duration": 1,
     "table": 1,
     "repeat": false,
     "ppl": 3,

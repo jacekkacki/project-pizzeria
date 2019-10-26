@@ -60,7 +60,6 @@ class Booking{
           eventsCurrentResponse.json(),
           eventsRepeatResponse.json(),
         ]);
-        
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
@@ -91,7 +90,23 @@ class Booking{
         }
       }
     }
-    //console.log('thisBooking.booked', thisBooking.booked);
+
+    /* NEW CODE */
+    const rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
+    const rangeSliderFill = thisBooking.dom.wrapper.querySelector('.rangeSlider__fill');
+    const selectedDate = thisBooking.datePicker.value;
+
+    if(selectedDate == '2019-10-27'){
+      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
+      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
+    } else if(selectedDate == '2019-10-29'){
+      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
+      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
+    } else {
+      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar.png)');
+      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar.png)');
+    }
+    /* END NEW CODE */
     thisBooking.updateDOM();
   }
 
@@ -110,6 +125,7 @@ class Booking{
         thisBooking.booked[date][hourBlock] = [];
       } 
       thisBooking.booked[date][hourBlock].push(table);
+      
     } 
   }
 
@@ -249,6 +265,21 @@ class Booking{
 
     thisBooking.dom.datePicker.addEventListener('updated', function(event){
       event.preventDefault();
+      const rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
+      const rangeSliderFill = thisBooking.dom.wrapper.querySelector('.rangeSlider__fill');
+      const selectedDate = thisBooking.datePicker.value;
+      
+      if(selectedDate == '2019-10-27'){
+        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
+        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
+      } else if(selectedDate == '2019-10-29'){
+        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
+        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
+      } else {
+        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar.png)');
+        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar.png)');
+      }
+
       thisBooking.updateDOM();
     });
 
