@@ -71,6 +71,7 @@ class Booking{
     const thisBooking = this;
 
     thisBooking.booked = {};
+    const selectedDate = thisBooking.datePicker.value;
 
     for(let item of bookings){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -90,26 +91,45 @@ class Booking{
         }
       }
     }
-
-    /* NEW CODE */
-    const rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
-    const rangeSliderFill = thisBooking.dom.wrapper.querySelector('.rangeSlider__fill');
-    const selectedDate = thisBooking.datePicker.value;
-
-    if(selectedDate == '2019-10-27'){
-      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
-      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
-    } else if(selectedDate == '2019-10-29'){
-      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
-      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
-    } else {
-      rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar.png)');
-      rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar.png)');
-    }
-    /* END NEW CODE */
+    thisBooking.colorHourBar(selectedDate);
     thisBooking.updateDOM();
   }
 
+  /*START NEW CODE */
+  colorHourBar(date){
+    const thisBooking = this;
+
+    const rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
+    let colorBar = [];
+
+    for(let halfHour = 12; halfHour < 24; halfHour += 0.5){
+
+      if(typeof thisBooking.booked[date][halfHour]  == 'undefined'){
+        thisBooking.booked[date][halfHour] = [];
+        colorBar.push('green');
+      }
+
+      if(typeof thisBooking.booked[date][halfHour]  != 'undefined'){
+        if(thisBooking.booked[date][halfHour].length  == 1){
+          colorBar.push('green');
+        } else if(thisBooking.booked[date][halfHour].length  == 2){
+          colorBar.push('orange');
+        } else if(thisBooking.booked[date][halfHour].length  == 3) {
+          colorBar.push('red');
+        }
+      }
+    }
+
+    const joinedColorBar = colorBar.join(', ');
+    //console.log('joinedColorBar', joinedColorBar);
+
+    if(date){
+      rangeSlider.style.setProperty('background-image', 'linear-gradient(to right,' + joinedColorBar + ')');
+    } 
+
+  }
+  /* END NEW CODE */
+      
   makeBooked(date, hour, duration, table){
     const thisBooking = this;
 
@@ -265,21 +285,7 @@ class Booking{
 
     thisBooking.dom.datePicker.addEventListener('updated', function(event){
       event.preventDefault();
-      const rangeSlider = thisBooking.dom.wrapper.querySelector('.rangeSlider');
-      const rangeSliderFill = thisBooking.dom.wrapper.querySelector('.rangeSlider__fill');
-      const selectedDate = thisBooking.datePicker.value;
-      
-      if(selectedDate == '2019-10-27'){
-        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
-        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2710.png)');
-      } else if(selectedDate == '2019-10-29'){
-        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
-        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar-2910.png)');
-      } else {
-        rangeSliderFill.style.setProperty('background-image', 'url(../../images/hourBar.png)');
-        rangeSlider.style.setProperty('background-image', 'url(../../images/hourBar.png)');
-      }
-
+      thisBooking.colorHourBar(thisBooking.datePicker.value);
       thisBooking.updateDOM();
     });
 
