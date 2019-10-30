@@ -121,7 +121,6 @@ class Booking{
     }
 
     const joinedColorBar = colorBar.join(', ');
-    //console.log('joinedColorBar', joinedColorBar);
 
     if(date){
       rangeSlider.style.setProperty('background-image', 'linear-gradient(to right,' + joinedColorBar + ')');
